@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import DesClaimerModal from "./DesclaimerModal";
 
 export default function CategoryCreate() {
-  const { isUserData,setDesclimarModal } = useContext(AuthContext);
+  const { isUserData, setDisclaimerModal } = useContext(AuthContext);
   const token = isUserData?.token;
   const [category, setCategory] = useState("");
   const [categoryImages, setCategoryImages] = useState([]);
@@ -24,6 +24,7 @@ export default function CategoryCreate() {
   };
 
   const handleSubmit = () => {
+    console.log("<<<<<<<<<<<<<<<<<<<=============>>>>>>>>>>>>>>>");
     if (!categoryImages.length > 0) {
       toast.error("Category Image Are Required", {
         type: "error",
@@ -47,7 +48,7 @@ export default function CategoryCreate() {
       },
       body: formData,
     })
-      .then((res) => {
+      .then(async (res) => {
         if (!res.ok) {
           return res.json().then((errorData) => {
             throw new Error(errorData.message || "Something went wrong!");
@@ -83,7 +84,7 @@ export default function CategoryCreate() {
     <div className="w-full overflow-x-auto rounded-xl border border-gray-200 bg-white px-6 py-2">
       <form onSubmit={(e)=>{
         e.preventDefault();
-        setDesclimarModal(true)
+        setDisclaimerModal(true)
         }}>
         {/* Category Name */}
         <div className="cloning-element mt-5 grid grid-cols-1 gap-5 lg:grid-cols-2">

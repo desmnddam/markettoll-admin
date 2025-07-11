@@ -25,6 +25,8 @@ import ReportDetails from "../pages/ReportDetails";
 import Reports from "../pages/Reports";
 import ResetPassword from "../pages/ResetPassword";
 import Revenue from "../pages/Revenue";
+import ReviewProduct from "../pages/ReviewProduct";
+import ReviewProductDetail from "../pages/ReviewProductDetail";
 import CreateSubCategory from "../pages/SubCategory/CreateSubCategory";
 import EditSubCategory from "../pages/SubCategory/EditSubCategory";
 import SubCategory from "../pages/SubCategory/SubCategory";
@@ -67,6 +69,18 @@ export const AppRoutes = [
     Title: "Products",
     url: "/productDetail/:id",
     page: <Layout pages={<ProductDetail />} />,
+    isPrivate: true,
+  },
+  {
+    Title: "Review Products",
+    url: "/review-product",
+    page: <Layout pages={<ReviewProduct />} />,
+    isPrivate: true,
+  },
+  {
+    Title: "Review Products",
+    url: "/review-productDetail/:id",
+    page: <Layout pages={<ReviewProductDetail />} />,
     isPrivate: true,
   },
   {

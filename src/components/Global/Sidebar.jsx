@@ -6,7 +6,7 @@ import { LuLayoutDashboard, LuUser } from "react-icons/lu";
 import { Logo } from "../../assets/export";
 import { LuFolderOpenDot } from "react-icons/lu";
 import { TbAlertCircleOff, TbFileInvoice } from "react-icons/tb";
-import { MdOutlineNoAccounts, MdSupportAgent } from "react-icons/md";
+import { MdOutlineNoAccounts, MdSupportAgent, MdRateReview  } from "react-icons/md";
 import { FaCartFlatbedSuitcase, FaTruckRampBox } from "react-icons/fa6";
 import { PiDresser } from "react-icons/pi";
 import cookie from "js-cookie";
@@ -78,6 +78,18 @@ const Sidebar = () => {
             }`}
           >
             <FaCartFlatbedSuitcase className="text-lg" /> Products
+          </button>
+        </li>
+        <li className="w-full">
+          <button
+            onClick={() => navigateToLink("/review-product", "review-product")}
+            className={`text-sm flex items-center gap-3 font-medium w-full py-3 px-6 rounded-lg ${
+              activeLink === "review-product"
+                ? "bg-[#0098EA] text-white"
+                : "bg-transparent text-black hover:bg-[#0098EA] hover:text-white transition-all duration-300"
+            }`}
+          >
+            <MdRateReview className="text-lg" /> Reveiw Product
           </button>
         </li>
         <li className="w-full">

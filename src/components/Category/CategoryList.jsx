@@ -8,7 +8,7 @@ import ViewSubCategModal from "./ViewSubCategModal";
 
 const CategoryList = () => {
  const navigate=useNavigate("");
-  const { isUserData, setLoader,setSubCatModal,SubCatModal,ViewSubCatModal, setViewSubCatModal} = useContext(AuthContext);
+  const { isUserData, setLoader,setSubCatModal,subCatModal,ViewSubCatModal, setViewSubCatModal} = useContext(AuthContext);
   const [Categories, SetCategories] = useState([]);
   const [ViewCategories, SetViewCategories] = useState([]);
   const [currentPageNumber, setCurrentPageNumber] = useState(1);
@@ -98,7 +98,7 @@ const CategoryList = () => {
     <div className="flex justify-between mb-3 items-center" >
          <h1 className="text-xl font-bold">Sub Category</h1>
          <button 
-        onClick={()=>setSubCatModal(!SubCatModal)}
+        onClick={()=>setSubCatModal(!subCatModal)}
         className={`active:scale-95 rounded-md px-6 py-2 text-sm font-medium text-white outline-none focus:ring  hover:opacity-90 bg-[#0098EA]`}
       >
         Create Sub Category

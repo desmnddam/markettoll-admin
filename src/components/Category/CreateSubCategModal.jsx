@@ -5,10 +5,10 @@ import { FaPlus } from "react-icons/fa6";
 import { toast } from "react-toastify";
 import BASE_URL from "../../constants/BaseUrl";
 const SubCategoryModal = ({Categories}) => {
-  const { SubCatModal, setSubCatModal, isUserData } = useContext(AuthContext);
+  const { subCatModal, setSubCatModal, isUserData } = useContext(AuthContext);
   const token = isUserData?.token;
   const [category, setCategory] = useState("");
-  const [subCategory, setSubCategory] = useState("");
+  const [subCategory, setSubCategory] = useState(Categories[0]);
   const [categoryImages, setCategoryImages] = useState([]);
   const navigate = useNavigate("");
   const handleCategoryImageChange = (e) => {
@@ -29,13 +29,12 @@ const SubCategoryModal = ({Categories}) => {
       });
       return;
     }
-  
     const loadingToastId = toast.loading("Submitting...");
     const formData = new FormData();
-    formData.append("categoryName", subCategory);
+    formData.append("categoryName", subCategory.name);
     
     // Ensure subcategoryNames is an array.
-    const subcategoryArray = Array.isArray(category) ? category : [category];
+    const subcategoryArray = Array.isArray(category) ? category: [category];
     formData.append("subcategoryNames", JSON.stringify(subcategoryArray));
   
     // Add all images to the form data.
@@ -82,7 +81,7 @@ const SubCategoryModal = ({Categories}) => {
   
 
   return (
-    SubCatModal && (
+    subCatModal && (
       <div className="w-screen h-screen flex items-center justify-center bg-[rgba(0,0,0,0.4)] fixed top-0 left-0 right-0 bottom-0 z-30 px-4">
         <div className="bg-white w-[550px] px-3 py-5 h-[650px] rounded-lg ">
           <h1 className="text-xl font-bold">Create Sub Category</h1>
@@ -111,7 +110,9 @@ const SubCategoryModal = ({Categories}) => {
                 <select
                   name="category"
                   required
-                  onChange={(e)=>setSubCategory(e.target.value)}
+                  onChange={(e)=>{
+                    console.log(">>>>>>>>>><<<<<<<<<<<<", subCategory);
+                    setSubCategory(e.target.value)}}
                   className="w-full text-sm border mt-2 border-gray-200 px-4 py-2 rounded-md shadow-sm outline-none focus:border-[#0085FF] focus:ring focus:ring-[#0098EA] focus:ring-opacity-50 text-sm"
                   placeholder="Enter Category Name"
                 >
