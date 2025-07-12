@@ -26,7 +26,7 @@ const Sidebar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   return (
-    <div className="w-full py-6 px-2  lg:px-10 flex overflow-y-auto description-scroll flex-col items-center gap-y-6">
+    <div className="w-full py-6 px-2  lg:px-5 flex overflow-y-auto description-scroll flex-col items-center gap-y-6">
       <div>
         {/* <h1 className="text-2xl font-semibold">BCT</h1> */}
         <img src={Logo} alt="" />

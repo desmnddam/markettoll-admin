@@ -6,7 +6,7 @@ import ProductSeller from "../components/ProductDetail/ProductSeller";
 import ConfirmDialog from "../components/ReviewProducts/ConfirmDialog";
 import BASE_URL from "../constants/BaseUrl";
 
-export default function ReviewProductDetail() {
+export default function ReviewServiceDetail() {
   const [displayImage, setDisplayImage] = useState(null);
   const loc = useLocation("");
   const navigate=useNavigate("");
@@ -133,12 +133,6 @@ export default function ReviewProductDetail() {
                   <p className="text-[13px] font-medium">
                     {loc?.state?.data?.city}
                   </p>
-                  <p className="text-[13px] text-[#7C7C7C] font-medium">
-                    Category
-                  </p>
-                  <p className="text-[13px] font-medium">
-                    {loc?.state?.data?.category}
-                  </p>
                 </div>
                 <div className="grid grid-cols-2 gap-y-3">
                   <p className="text-[13px] text-[#7C7C7C] font-medium">
@@ -146,12 +140,6 @@ export default function ReviewProductDetail() {
                   </p>
                   <p className="text-[13px] font-medium">
                     {loc?.state?.data?.state}
-                  </p>
-                  <p className="text-[13px] text-[#7C7C7C] font-medium">
-                    Sub Category
-                  </p>
-                  <p className="text-[13px] font-medium">
-                    {loc?.state?.data?.subCategory}
                   </p>
                 </div>
               </div>
@@ -165,7 +153,34 @@ export default function ReviewProductDetail() {
                 </p>
               </div>
               <div className="w-full border" />
-              <ProductSeller seller={loc?.state?.data?.seller} />
+              <div className="w-full">
+                  <p className="blue-text text-sm font-bold mb-3">Seller</p>
+                  <div className="flex items-center gap-2">
+                    <img
+                      src={seller ? seller?.profileImage : "/seller-profile-img.png"}
+                      alt="seller profile image"
+                      className="w-[68px] h-[68px] rounded-full bg-cover"
+                    />
+                    <div className="flex flex-col items-start">
+                      <span className="text-[#676767] text-[13px] font-normal">
+                        Posted By
+                      </span>
+                      <div className="flex items-center gap-2">
+                        <span className="text-[18px] font-medium">{loc?.state?.data?.seller.name}</span>
+                        {/* <span className="flex items-center gap-1">
+                          <IoIosStar className="text-yellow-400" /> 4.8
+                        </span> */}
+                      </div>
+                      <Link
+                        to={`/user/${seller?._id}`}
+                        state={{data:seller}}
+                        className="text-[13px] font-semibold underline"
+                      >
+                        View Profile
+                      </Link>
+                    </div>
+                  </div>
+                </div>
               <div className="w-full border" />
             </div>
           </div>

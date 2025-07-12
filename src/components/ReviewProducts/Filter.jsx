@@ -8,7 +8,7 @@ import React, {
 import { CiSearch } from "react-icons/ci";
 import { AuthContext } from "../../context/AuthContext";
 
-export function ReviewProductFilter({ setFilterData }) {
+export function ReviewFilter({ setFilterData }) {
   const [InputVal, setInputVal] = useState("");
 
   const FilterUsers = (val) => {
@@ -238,7 +238,7 @@ export function FilterProductSubCategory({
   );
 }
 
-export function FilterProductStatus() {
+export function FilterStatus() {
 
   return (
     <div className="relative inline-block text-left">

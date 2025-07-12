@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import ReviewProductList from "../components/ReviewProducts/ReviewProductList";
-import { ReviewProductFilter } from "../components/ReviewProducts/Filter";
+import ReviewList from "../components/ReviewProducts/ReviewList";
+import { ReviewFilter } from "../components/ReviewProducts/Filter";
 export default function ReviewProduct() {
   useEffect(() => {
     const scrollToTop = () => {
@@ -19,8 +19,8 @@ export default function ReviewProduct() {
         Pending Products/Services{" "}
         <span className="text-[#0098EA] text-sm">({productLength})</span>
       </h1>
-      <ReviewProductFilter setFilterData={setFilterData} />
-      <ReviewProductList filterData={filterData} setFilterLength={setFilterLength} />
+      <ReviewFilter setFilterData={setFilterData} />
+      <ReviewList filterData={filterData} setFilterLength={setFilterLength} />
     </div>
   );
 }
