@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import ProductListItem from "./ProductListItem";
+import ServiceListItem from "./ServiceListItem";
 import BASE_URL from "../../constants/BaseUrl";
 import { AuthContext } from "../../context/AuthContext";
 import {
@@ -20,8 +21,8 @@ const ReviewList = ({ filterData, setFilterLength }) => {
   const [displayValue, setDisplayValue] = useState("Category");
   const [SubCategFill, setSubCategFill] = useState("Sub Category");
   const [isProducts, setIsProducts] = useState(true);
+  const [isViewed, setIsViewed] = useState(true);
   const token = isUserData?.token;
-
   useEffect(() => {
     setLoader(true);
 
@@ -62,16 +63,17 @@ const ReviewList = ({ filterData, setFilterLength }) => {
     )
       .then((res) => res.json())
       .then((res) => {
-        setService(res.data);
-        setServiceToDisplay(res?.data?.slice(0, TOTAL_VALUES_PER_PAGE));
-        setFilterLength(res?.data?.slice(0, TOTAL_VALUES_PER_PAGE)?.length)
+        console.log(res.data, "service");
+        setService(res.data.items);
+        setServiceToDisplay(res?.data?.items?.slice(0, TOTAL_VALUES_PER_PAGE));
+        setFilterLength(res?.data?.items?.slice(0, TOTAL_VALUES_PER_PAGE)?.length)
         setLoader(false);
       })
       .catch((error) => {
         console.error("Error fetching users:", error);
         setLoader(false);
       });
-  }, [isUserData, filterData, displayValue, SubCategFill]);
+  }, [isUserData, filterData, displayValue, SubCategFill], productToDisplay, serviceToDisplay);
 
   const goOnPrevPage = () => {
     if (currentPageNumber === 1) return;
@@ -89,10 +91,11 @@ const ReviewList = ({ filterData, setFilterLength }) => {
     const end = currentPageNumber * TOTAL_VALUES_PER_PAGE;
     setProductToDisplay(Product.slice(start, end));
   }, [currentPageNumber]);
+  console.log("sdjf", serviceToDisplay);
 
   return (
     <>
-      {/* <div className="mt-2  w-full grid-cols-2  flex items-center justify-end space-x-4 md:flex">
+      <div className="mt-2  w-full grid-cols-2  flex items-center justify-end space-x-4 md:flex">
         <button
           onClick={() => setIsProducts(true)}
           className={`active:scale-95 rounded-md ${isProducts
@@ -111,7 +114,7 @@ const ReviewList = ({ filterData, setFilterLength }) => {
         >
           Service
         </button>
-      </div> */}
+      </div>
       {
         isProducts ? (
           <div className="w-full overflow-x-auto h-[400px] description-scroll rounded-xl border border-gray-200 bg-white px-6 py-2 ">
@@ -169,7 +172,7 @@ const ReviewList = ({ filterData, setFilterLength }) => {
               {loader ? <span className="loader"></span> : (
                 <tbody className="divide-y divide-gray-100 border-t border-gray-100">
                   {productToDisplay?.map((item) => (
-                    <ProductListItem item={item} key={item._id} />
+                    <ProductListItem item={item} key={item._id} setProductToDisplay={setProductToDisplay} productToDisplay={productToDisplay} />
                   ))}
                 </tbody>
               )}
@@ -215,7 +218,7 @@ const ReviewList = ({ filterData, setFilterLength }) => {
               {loader ? <span className="loader"></span> : (
                 <tbody className="divide-y divide-gray-100 border-t border-gray-100">
                   {serviceToDisplay?.map((item) => (
-                    <ProductListItem item={item} key={item._id} />
+                    <ServiceListItem item={item} key={item._id} setServiceToDisplay={setServiceToDisplay} serviceToDisplay={serviceToDisplay} />
                   ))}
                 </tbody>
               )}

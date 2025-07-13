@@ -4,8 +4,7 @@ import ConfirmDialog from './ConfirmDialog';
 import BASE_URL from "../../constants/BaseUrl";
 import { AuthContext } from "../../context/AuthContext";
 
-
-const ProductListItem = ({ item }) => {
+const ProductListItem = ({ item, setProductToDisplay, productToDisplay }) => {
   const navigate = useNavigate("");
 
   const { isUserData } = useContext(AuthContext);
@@ -37,7 +36,8 @@ const ProductListItem = ({ item }) => {
       // Optionally, you can throw an error or handle it as needed
       throw new Error('Failed to moderate products');
     }
-    console.log(response.json());
+    setConfirmType(null);
+    setProductToDisplay(productToDisplay.filter(item => !manualSelectedItems.includes(item._id)));
     navigate(`/review-Product`);
     setManualSelectedItems([]);
   };
@@ -46,18 +46,34 @@ const ProductListItem = ({ item }) => {
   }
 
   return (
-    <tr className="cursor-pointer"
-      onClick={() => {
-        navigate(`/review-ProductDetail/${item._id}`, { state: { data: item } });
-      }}
-    >
-      <td className="px-6 lg:px-4 xl:px-3 py-4 text-nowrap">{item.name}</td>
-      <td className="px-6 lg:px-4 xl:px-3 py-4 text-nowrap">{item.category}</td>
-      <td className="px-6 lg:px-4 xl:px-3 py-4 text-nowrap">
+    <tr className="cursor-pointer">
+      <td className="px-6 lg:px-4 xl:px-3 py-4 text-nowrap"
+        onClick={() => {
+          navigate(`/review-ProductDetail/${item._id}`, { state: { data: item } });
+        }}
+      >
+        {item.name}
+      </td>
+      <td className="px-6 lg:px-4 xl:px-3 py-4 text-nowrap"
+        onClick={() => {
+          navigate(`/review-ProductDetail/${item._id}`, { state: { data: item } });
+        }}
+      >
+        {item.category}
+      </td>
+      <td className="px-6 lg:px-4 xl:px-3 py-4 text-nowrap"
+        onClick={() => {
+          navigate(`/review-ProductDetail/${item._id}`, { state: { data: item } });
+        }}
+      >
         {item.subCategory}
       </td>
 
-      <td className="px-6 lg:px-4 xl:px-3 py-4">${item.price}</td>
+      <td className="px-6 lg:px-4 xl:px-3 py-4"
+        onClick={() => {
+          navigate(`/review-ProductDetail/${item._id}`, { state: { data: item } });
+        }}
+      >${item.price}</td>
       <td className="px-6 lg:px-4 xl:px-3 py-4">
         <div>
           <button

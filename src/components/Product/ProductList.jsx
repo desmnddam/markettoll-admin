@@ -9,25 +9,23 @@ import {
   MultiRangeSlider,
 } from "./Filter";
 
-const ProductList = ({ filterData,setFilterLength }) => {
+const ProductList = ({ filterData, setFilterLength }) => {
   const [active, SetActive] = useState("products");
-  const { isUserData, setLoader,loader } = useContext(AuthContext);
+  const { isUserData, setLoader, loader } = useContext(AuthContext);
   const [Product, SetProduct] = useState([]);
   const [currentPageNumber, setCurrentPageNumber] = useState(1);
   const [dataToDisplay, setDataToDisplay] = useState([]);
   const TOTAL_VALUES_PER_PAGE = 10;
   const [displayValue, setDisplayValue] = useState("Category");
   const [SubCategFill, setSubCategFill] = useState("Sub Category");
-  console.log(dataToDisplay,"productData");
-  
+  console.log(dataToDisplay, "productData");
+
   useEffect(() => {
     setLoader(true);
     const token = isUserData?.token;
     fetch(
-      `${BASE_URL}/admin/${active}?name=${filterData || ""}&category=${
-        displayValue == "Category" ? "" : displayValue
-      }&subCategory=${
-        SubCategFill != "Sub Category" ? SubCategFill : ""
+      `${BASE_URL}/admin/${active}?name=${filterData || ""}&category=${displayValue == "Category" ? "" : displayValue
+      }&subCategory=${SubCategFill != "Sub Category" ? SubCategFill : ""
       }&page=1`,
       {
         method: "GET",
@@ -51,7 +49,7 @@ const ProductList = ({ filterData,setFilterLength }) => {
   }, [isUserData, filterData, active, displayValue, SubCategFill]);
 
   const goOnPrevPage = () => {
-    if (currentPageNumber === 1) return; 
+    if (currentPageNumber === 1) return;
     setCurrentPageNumber((prev) => prev - 1);
   };
 
@@ -93,7 +91,6 @@ const ProductList = ({ filterData,setFilterLength }) => {
         <table className="w-full mt-4  border-collapse  text-left text-sm text-gray-500">
           <thead className="">
             <tr className="">
-              <th></th>
               <th
                 scope="col"
                 className="px-6 lg:px-4 xl:px-3 rounded-s-lg py-4 text-sm font-semibold"
@@ -129,7 +126,7 @@ const ProductList = ({ filterData,setFilterLength }) => {
                 <MultiRangeSlider
                   min={0}
                   max={100000}
-               
+
                   dataToDisplay={dataToDisplay}
                   setDataToDisplay={setDataToDisplay}
                 />
@@ -139,23 +136,22 @@ const ProductList = ({ filterData,setFilterLength }) => {
                 className="px-6 lg:px-4 xl:px-2  py-4 text-sm font-semibold"
               >
                 <FilterProductStatus SetActive={SetActive} />
-              </th>             
+              </th>
             </tr>
           </thead>
-           {loader ? <span className="loader"></span> : (
-          <tbody className="divide-y divide-gray-100 border-t border-gray-100">
-            {dataToDisplay?.map((item) => (
-              <ProductListItem item={item} />
-            ))}
-          </tbody>
-           )}
+          {loader ? <span className="loader"></span> : (
+            <tbody className="divide-y divide-gray-100 border-t border-gray-100">
+              {dataToDisplay?.map((item) => (
+                <ProductListItem item={item} />
+              ))}
+            </tbody>
+          )}
         </table>
       </div>
       <div className="flex justify-end gap-3 w-full">
         <button
-          className={`${
-            currentPageNumber === 1 ? " bg-[#9fdeff]" : " bg-[#0098EA]"
-          } px-2 rounded-md w-[80px] text-white py-2 `}
+          className={`${currentPageNumber === 1 ? " bg-[#9fdeff]" : " bg-[#0098EA]"
+            } px-2 rounded-md w-[80px] text-white py-2 `}
           onClick={goOnPrevPage}
         >
           Prev
