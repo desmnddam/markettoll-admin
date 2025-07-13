@@ -11,8 +11,6 @@ export default function ReviewProduct() {
   }, []);
   const [filterData, setFilterData] = useState([]);
   const [productLength, setFilterLength] = useState(0);
-
-  console.log(filterData, "filterData");
   return (
     <div className="w-full flex flex-col gap-y-4">
       <h1 className="text-xl font-bold">

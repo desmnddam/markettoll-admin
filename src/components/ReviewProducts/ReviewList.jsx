@@ -10,7 +10,7 @@ import {
 } from "./Filter";
 
 const ReviewList = ({ filterData, setFilterLength }) => {
-  const { isUserData, setLoader,loader } = useContext(AuthContext);
+  const { isUserData, setLoader, loader } = useContext(AuthContext);
   const [Product, SetProduct] = useState([]);
   const [service, setService] = useState([]);
   const [currentPageNumber, setCurrentPageNumber] = useState(1);
@@ -21,16 +21,13 @@ const ReviewList = ({ filterData, setFilterLength }) => {
   const [SubCategFill, setSubCategFill] = useState("Sub Category");
   const [isProducts, setIsProducts] = useState(true);
   const token = isUserData?.token;
-  console.log(productToDisplay,"productData");
-  
+
   useEffect(() => {
     setLoader(true);
-    
+
     fetch(
-      `${BASE_URL}/admin/pending-review-products?name=${filterData || ""}&category=${
-        displayValue == "Category" ? "" : displayValue
-      }&subCategory=${
-        SubCategFill != "Sub Category" ? SubCategFill : ""
+      `${BASE_URL}/admin/pending-review-products?name=${filterData || ""}&category=${displayValue == "Category" ? "" : displayValue
+      }&subCategory=${SubCategFill != "Sub Category" ? SubCategFill : ""
       }&page=1`,
       {
         method: "GET",
@@ -52,6 +49,7 @@ const ReviewList = ({ filterData, setFilterLength }) => {
         setLoader(false);
       });
     setLoader(true);
+
     fetch(
       `${BASE_URL}/admin/pending-review-services?name=${filterData || ""}&page=1`,
       {
@@ -76,7 +74,7 @@ const ReviewList = ({ filterData, setFilterLength }) => {
   }, [isUserData, filterData, displayValue, SubCategFill]);
 
   const goOnPrevPage = () => {
-    if (currentPageNumber === 1) return; 
+    if (currentPageNumber === 1) return;
     setCurrentPageNumber((prev) => prev - 1);
   };
 
@@ -94,7 +92,7 @@ const ReviewList = ({ filterData, setFilterLength }) => {
 
   return (
     <>
-      <div className="mt-2  w-full grid-cols-2  flex items-center justify-end space-x-4 md:flex">
+      {/* <div className="mt-2  w-full grid-cols-2  flex items-center justify-end space-x-4 md:flex">
         <button
           onClick={() => setIsProducts(true)}
           className={`active:scale-95 rounded-md ${isProducts
@@ -113,9 +111,9 @@ const ReviewList = ({ filterData, setFilterLength }) => {
         >
           Service
         </button>
-      </div>
+      </div> */}
       {
-        isProducts? (
+        isProducts ? (
           <div className="w-full overflow-x-auto h-[400px] description-scroll rounded-xl border border-gray-200 bg-white px-6 py-2 ">
             <table className="w-full mt-4  border-collapse  text-left text-sm text-gray-500">
               <thead className="">
@@ -155,7 +153,7 @@ const ReviewList = ({ filterData, setFilterLength }) => {
                     <MultiRangeSlider
                       min={0}
                       max={100000}
-                  
+
                       dataToDisplay={productToDisplay}
                       setDataToDisplay={setProductToDisplay}
                     />
@@ -165,15 +163,15 @@ const ReviewList = ({ filterData, setFilterLength }) => {
                     className="px-6 lg:px-4 xl:px-2  py-4 text-sm font-semibold"
                   >
                     <FilterStatus />
-                  </th>             
+                  </th>
                 </tr>
               </thead>
               {loader ? <span className="loader"></span> : (
-              <tbody className="divide-y divide-gray-100 border-t border-gray-100">
-                {productToDisplay?.map((item) => (
-                  <ProductListItem item={item} key={item._id}/>
-                ))}
-              </tbody>
+                <tbody className="divide-y divide-gray-100 border-t border-gray-100">
+                  {productToDisplay?.map((item) => (
+                    <ProductListItem item={item} key={item._id} />
+                  ))}
+                </tbody>
               )}
             </table>
           </div>
@@ -201,7 +199,7 @@ const ReviewList = ({ filterData, setFilterLength }) => {
                     <MultiRangeSlider
                       min={0}
                       max={100000}
-                  
+
                       dataToDisplay={serviceToDisplay}
                       setDataToDisplay={setServiceToDisplay}
                     />
@@ -211,26 +209,25 @@ const ReviewList = ({ filterData, setFilterLength }) => {
                     className="px-6 lg:px-4 xl:px-2  py-4 text-sm font-semibold"
                   >
                     <FilterStatus />
-                  </th>             
+                  </th>
                 </tr>
               </thead>
               {loader ? <span className="loader"></span> : (
-              <tbody className="divide-y divide-gray-100 border-t border-gray-100">
-                {serviceToDisplay?.map((item) => (
-                  <ProductListItem item={item} key={item._id}/>
-                ))}
-              </tbody>
+                <tbody className="divide-y divide-gray-100 border-t border-gray-100">
+                  {serviceToDisplay?.map((item) => (
+                    <ProductListItem item={item} key={item._id} />
+                  ))}
+                </tbody>
               )}
             </table>
           </div>
         )
       }
-      
+
       <div className="flex justify-end gap-3 w-full">
         <button
-          className={`${
-            currentPageNumber === 1 ? " bg-[#9fdeff]" : " bg-[#0098EA]"
-          } px-2 rounded-md w-[80px] text-white py-2 `}
+          className={`${currentPageNumber === 1 ? " bg-[#9fdeff]" : " bg-[#0098EA]"
+            } px-2 rounded-md w-[80px] text-white py-2 `}
           onClick={goOnPrevPage}
         >
           Prev

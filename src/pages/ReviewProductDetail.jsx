@@ -9,15 +9,14 @@ import BASE_URL from "../constants/BaseUrl";
 export default function ReviewProductDetail() {
   const [displayImage, setDisplayImage] = useState(null);
   const loc = useLocation("");
-  const navigate=useNavigate("");
-  console.log(loc?.state?.data,"data");
+  const navigate = useNavigate("");
 
-  useEffect(()=>{
+  useEffect(() => {
     if (!loc?.state?.data) {
       navigate("/products")
     }
   })
-    useEffect(() => {
+  useEffect(() => {
     if (loc?.state?.data.images?.length > 0) {
       const defaultDisplayImage =
         loc.state.data.images.find((image) => image.displayImage === true) ||
@@ -34,7 +33,7 @@ export default function ReviewProductDetail() {
   const [confirmType, setConfirmType] = useState(null);
   const [manualSelectedItems, setManualSelectedItems] = useState([]);
   const token = isUserData?.token;
-  
+
   const handleAccept = (id) => {
     console.log("??????????????", id);
     setConfirmType('accepted');
@@ -73,7 +72,7 @@ export default function ReviewProductDetail() {
             <Link to="/review-product" className="flex items-center gap-1 mb-5">
               <GoArrowLeft className="text-xl" />
               <span className="font-medium text-sm text-[#5C5C5C]">Back</span>
-            </Link> 
+            </Link>
             <div>
               <button
                 className={`w-[80px] px-3 py-3 mx-2 bg-[#0098EA] text-white hover:opacity-80 rounded-md text-xs`}
@@ -107,11 +106,10 @@ export default function ReviewProductDetail() {
                     key={index}
                     src={image?.url}
                     alt={`Thumbnail ${index + 1}`}
-                    className={`rounded-xl h-[97px] w-full object-cover cursor-pointer ${
-                      image?.url === displayImage?.url
+                    className={`rounded-xl h-[97px] w-full object-cover cursor-pointer ${image?.url === displayImage?.url
                         ? "border-2 border-blue-500"
                         : ""
-                    }`}
+                      }`}
                     onClick={() => handleThumbnailClick(image)}
                   />
                 ))}
@@ -170,7 +168,7 @@ export default function ReviewProductDetail() {
             </div>
           </div>
           <div className="mt-3">
-          <h1 className="font-semibold mb-3 text-xl">Moderation Reason: {loc?.state?.data?.moderationReason}</h1>
+            <h1 className="font-semibold mb-3 text-xl">Moderation Reason: {loc?.state?.data?.moderationReason}</h1>
           </div>
         </div>
       </div>

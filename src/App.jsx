@@ -8,7 +8,6 @@ import Cookie from "js-cookie";
 
 function App() {
   const { isLoggedIn, setUserData, setIsLoggedIn } = useContext(AuthContext);
-  console.log(isLoggedIn, "isLog");
 
   const token = Cookie.get("data");
   const navigate = useNavigate("");
